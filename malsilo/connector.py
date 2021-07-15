@@ -4,8 +4,6 @@ from .get_feed import get_ipv4_feed, get_domain_feed, get_url_feed
 
 logger = get_logger('malsilo')
 
-# test commit
-
 class Malsiloipv4(Connector):
 
     def execute(self, config, operation, params, **kwargs):
