@@ -1,19 +1,25 @@
 {
   "name": "malsilo",
   "label": "MalSilo",
-  "description": "Ingest Threat Intel Feeds from MalSilo Gitlab",
+  "description": "Ingest Threat Intel Feeds from MalSilo Gitlab. <br/><br/>This connector has a dependency on the <a href=\"/content-hub/all-content/?contentType=solutionpack&amp;tag=ThreatIntelManagement\" target=\"_blank\" rel=\"noopener\">Threat Intel Management Solution Pack</a>. Install the Solution Pack before enabling ingestion of Threat Feeds from this source.",
   "publisher": "Fortinet",
   "cs_approved": true,
   "cs_compatible": true,
-  "version": "1.0.0",
+  "version": "2.0.0",
   "category": "ThreatIntel",
   "icon_small_name": "small.png",
   "icon_large_name": "large.png",
   "help_online": "https://docs.fortinet.com/document/fortisoar/1.0.0/malsilo/75/malsilo-v1-0-0",
   "ingestion_supported": true,
+  "tags": [
+    "ThreatIntel"
+  ],
   "ingestion_modes": [
     "scheduled"
   ],
+  "ingestion_preferences": {
+    "modules": ["threat_intel_feeds", "indicators"]
+  },
   "configuration": {
     "fields": [
       {
@@ -68,7 +74,19 @@
       "enabled": true,
       "annotation": "get_ipv4_feed",
       "category": "get_feed",
-      "parameters": [],
+      "parameters": [
+        {
+          "title": "Last Pull Time",
+          "description": "Last time the feeds were pulled",
+          "type": "text",
+          "name": "last_pull_time",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "tooltip": "Time when feeds where pulled",
+          "placeholder": "yyyy-mm-dd hh:mm:ss"
+        }
+      ],
       "output_schema": {
         "generatedAt": "",
         "feed": [
@@ -90,7 +108,19 @@
       "enabled": true,
       "annotation": "get_url_feed",
       "category": "get_feed",
-      "parameters": [],
+      "parameters": [
+        {
+          "title": "Last Pull Time",
+          "description": "Last time the feeds were pulled",
+          "type": "text",
+          "name": "last_pull_time",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "tooltip": "Time when feeds where pulled",
+          "placeholder": "yyyy-mm-dd hh:mm:ss"
+        }
+      ],
       "output_schema": {
         "generatedAt": "",
         "feed": [
@@ -112,7 +142,19 @@
       "enabled": true,
       "annotation": "get_domain_feed",
       "category": "get_feed",
-      "parameters": [],
+      "parameters": [
+        {
+          "title": "Last Pull Time",
+          "description": "Last time the feeds were pulled",
+          "type": "text",
+          "name": "last_pull_time",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "tooltip": "Time when feeds where pulled",
+          "placeholder": "yyyy-mm-dd hh:mm:ss"
+        }
+      ],
       "output_schema": {
         "generatedAt": "",
         "feed": [
