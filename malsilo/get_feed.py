@@ -13,8 +13,9 @@ TYPE_URL = 'url'
 TYPE_DOMAIN = 'domain'
 
 
-def get_feed(type, url, verify_ssl):
+def get_feed(type, url, verify_ssl, last_pull_time=None):
     ip_list = []
+    seen_ip_values = []
     keys = []
     found_keys = False
     generatedAt = None
@@ -36,35 +37,45 @@ def get_feed(type, url, verify_ssl):
                     found_keys = True
                 else:
                     ip_detail = {'type': type}
+                    append = True
                     for count in range(len(keys)):
+                        if keys[count] == 'value':
+                            if row[count] in seen_ip_values:
+                                append = False
+                                break
                         ip_detail[keys[count]] = row[count]
-                    ip_list.append(ip_detail)
+                    if append:
+                        # To avoid the duplicate values in feeds
+                        ip_list.append(ip_detail)
+                        seen_ip_values.append(ip_detail['value'])
             else:
                 # try to parse for data generation timestamp
                 for item in row:
                     if "Dataset generated @" in item:
                         generatedAt = re.sub('.*Dataset generated @([0-9 :-]*) \(.*', '\\1', item).strip()
-                        print(generatedAt)
-    try:
-        if generatedAt:
-            generatedAt = datetime.strptime(generatedAt, '%Y-%m-%d %H:%M:%S').timestamp()
-    except Exception as e:
-        raise ConnectorError("Error parsing the feed generation timestamp for the IP Feed URL: " + str(e))
-    return {"generatedAt": generatedAt, "feed": ip_list}
+                        try:
+                            generatedAt = datetime.strptime(generatedAt, '%Y-%m-%d %H:%M:%S')
+                            if last_pull_time:
+                                last_pull_time = datetime.strptime(last_pull_time, '%Y-%m-%d %H:%M:%S')
+                            if last_pull_time > generatedAt:
+                                return {"generatedAt": generatedAt.timestamp(), "feed": ip_list}
+                        except Exception as e:
+                            logger.error('Error while computing pull time Error {0}'.format(str(e)))
+    return {"generatedAt": generatedAt.timestamp(), "feed": ip_list}
 
 
 def get_ipv4_feed(config, params):
     url = config.get('ipv4_url', 'https://malsilo.gitlab.io/feeds/dumps/ip_list.txt')
     verify_ssl = config.get('verify_ssl', True)
-    return get_feed(TYPE_IPv4, url, verify_ssl)
+    return get_feed(TYPE_IPv4, url, verify_ssl, last_pull_time=params.get('last_pull_time'))
 
 
 def get_url_feed(config, params):
     url = config.get('url_url', 'https://malsilo.gitlab.io/feeds/dumps/url_list.txt')
     verify_ssl = config.get('verify_ssl', True)
-    return get_feed(TYPE_URL, url, verify_ssl)
+    return get_feed(TYPE_URL, url, verify_ssl, last_pull_time=params.get('last_pull_time'))
 
 def get_domain_feed(config, params):
     url = config.get('domain_url', 'https://malsilo.gitlab.io/feeds/dumps/domain_list.txt')
     verify_ssl = config.get('verify_ssl', True)
-    return get_feed(TYPE_DOMAIN, url, verify_ssl)
+    return get_feed(TYPE_DOMAIN, url, verify_ssl, last_pull_time=params.get('last_pull_time'))

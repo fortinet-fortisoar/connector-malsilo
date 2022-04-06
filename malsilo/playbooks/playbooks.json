@@ -3,11 +3,18 @@
   "data": [
     {
       "@type": "WorkflowCollection",
-      "name": "Sample - MalSilo - 1.0.0",
+      "name": "Sample - MalSilo - 2.0.0",
       "description": "Sample playbooks for \"MalSilo\" connector. If you are planning to use any of the sample playbooks in your environment, ensure that you clone those playbooks and move them to a different collection, since the sample playbook collection gets deleted during connector upgrade and delete.",
       "visible": true,
       "image": "playbook_logo.png",
       "uuid": "dfd1ec27-4dfc-4eeb-9810-f3a3f21d86b1",
+      "id": 67,
+      "createUser": "/api/3/appliances/57545210-2adc-472b-a24f-2df6ee8dfe63",
+      "createDate": 1649162690.434765,
+      "modifyUser": "/api/3/appliances/57545210-2adc-472b-a24f-2df6ee8dfe63",
+      "modifyDate": 1649162690.434765,
+      "deletedAt": null,
+      "importedBy": [],
       "recordTags": [],
       "workflows": [
         {
@@ -15,14 +22,17 @@
           "triggerLimit": null,
           "name": "Get IP Feeds",
           "aliasName": null,
-          "description": "Get IP Feeds from MalSilo",
-          "collection": "/api/3/workflow_collections/dfd1ec27-4dfc-4eeb-9810-f3a3f21d86b1",
           "tag": null,
+          "description": "Get IP Feeds from MalSilo",
           "isActive": false,
+          "debug": false,
           "singleRecordExecution": false,
           "remoteExecutableFlag": false,
           "parameters": [],
           "synchronous": false,
+          "lastModifyDate": 1649227681,
+          "collection": "/api/3/workflow_collections/dfd1ec27-4dfc-4eeb-9810-f3a3f21d86b1",
+          "versions": [],
           "triggerStep": "/api/3/workflow_steps/f8dc9861-17b3-4bad-be45-23537a017f43",
           "steps": [
             {
@@ -31,9 +41,11 @@
               "description": null,
               "arguments": {
                 "name": "MalSilo",
-                "config": "9cf5e6e3-31ab-40a6-bfd3-5a459b8a0eae",
-                "params": [],
-                "version": "1.0.0",
+                "config": "71786850-ce25-4493-afad-8817c441ced6",
+                "params": {
+                  "last_pull_time": "{% if globalVars.MalSiloLastPullTime %}{{ globalVars.MalSiloLastPullTime }}{% else %}{{ arrow.utcnow().timestamp }}{% endif %}"
+                },
+                "version": "2.0.0",
                 "connector": "malsilo",
                 "operation": "get_ipv4_feed",
                 "operationTitle": "Get IPv4 Feeds",
@@ -41,8 +53,8 @@
                 "step_variables": []
               },
               "status": null,
-              "left": "193",
               "top": "135",
+              "left": "193",
               "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
               "uuid": "a48d2563-bbd1-4c83-854d-31221aa3d32c"
             },
@@ -59,6 +71,7 @@
                 "inputVariables": [],
                 "step_variables": {
                   "input": {
+                    "params": [],
                     "records": "{{vars.input.records}}"
                   }
                 },
@@ -67,8 +80,8 @@
                 "singleRecordExecution": false
               },
               "status": null,
-              "left": "40",
               "top": "40",
+              "left": "40",
               "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
               "uuid": "f8dc9861-17b3-4bad-be45-23537a017f43"
             }
@@ -76,37 +89,45 @@
           "routes": [
             {
               "@type": "WorkflowRoute",
-              "uuid": "09eae1ba-f4c4-405c-b841-ec5afc732df8",
               "name": "Start -> Get IP Feeds",
+              "targetStep": "/api/3/workflow_steps/a48d2563-bbd1-4c83-854d-31221aa3d32c",
+              "sourceStep": "/api/3/workflow_steps/f8dc9861-17b3-4bad-be45-23537a017f43",
               "label": null,
               "isExecuted": false,
-              "targetStep": "/api/3/workflow_steps/a48d2563-bbd1-4c83-854d-31221aa3d32c",
-              "sourceStep": "/api/3/workflow_steps/f8dc9861-17b3-4bad-be45-23537a017f43"
+              "uuid": "09eae1ba-f4c4-405c-b841-ec5afc732df8"
             }
           ],
-          "versions": null,
-          "lastModifyDate": 1604992639,
           "priority": "/api/3/picklists/2b563c61-ae2c-41c0-a85a-c9709585e3f2",
           "uuid": "03951cfc-57aa-4faf-a133-115ee61c98a3",
+          "id": 554,
+          "createUser": "/api/3/appliances/57545210-2adc-472b-a24f-2df6ee8dfe63",
+          "createDate": 1649162690.43639,
+          "modifyUser": "/api/3/people/3451141c-bac6-467c-8d72-85e0fab569ce",
+          "modifyDate": 1649227681.721093,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
           "recordTags": [
             "malsilo"
-          ],
-          "isPrivate": false,
-          "owners": []
+          ]
         },
         {
           "@type": "Workflow",
           "triggerLimit": null,
           "name": "MalSilo > Ingest",
           "aliasName": null,
-          "description": "Data Ingestion Playbook",
-          "collection": "/api/3/workflow_collections/dfd1ec27-4dfc-4eeb-9810-f3a3f21d86b1",
           "tag": "#malsilo4 #dataIngestion #ingest",
+          "description": "Data Ingestion Playbook",
           "isActive": false,
+          "debug": true,
           "singleRecordExecution": false,
           "remoteExecutableFlag": false,
           "parameters": [],
           "synchronous": false,
+          "lastModifyDate": 1649233890,
+          "collection": "/api/3/workflow_collections/dfd1ec27-4dfc-4eeb-9810-f3a3f21d86b1",
+          "versions": [],
           "triggerStep": "/api/3/workflow_steps/b0af6dd7-5aae-4680-b69e-f22ce15419dd",
           "steps": [
             {
@@ -114,11 +135,15 @@
               "name": "Start",
               "description": null,
               "arguments": {
-                "step_variables": []
+                "step_variables": {
+                  "input": {
+                    "params": []
+                  }
+                }
               },
               "status": null,
-              "left": "33",
               "top": "20",
+              "left": "40",
               "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62",
               "uuid": "b0af6dd7-5aae-4680-b69e-f22ce15419dd"
             },
@@ -133,32 +158,10 @@
                 "workflowReference": "/api/3/workflows/9634df50-4ed5-45f0-a9ed-ad578a1e6a55"
               },
               "status": null,
-              "left": "200",
               "top": "111",
+              "left": "200",
               "stepType": "/api/3/workflow_step_types/74932bdc-b8b6-4d24-88c4-1a4dfbc524f3",
               "uuid": "60aba241-933c-43d6-80f1-1d37d06c9b89"
-            },
-            {
-              "@type": "WorkflowStep",
-              "name": "Create",
-              "description": null,
-              "arguments": {
-                "for_each": {
-                  "item": "{{ vars.steps.Fetch.data | batch(200) | list }}",
-                  "condition": ""
-                },
-                "arguments": {
-                  "threat_feeds": "{{ vars.item }}"
-                },
-                "apply_async": false,
-                "step_variables": [],
-                "workflowReference": "/api/3/workflows/ef459fff-30b0-4de5-936a-21337b312e68"
-              },
-              "status": null,
-              "left": "360",
-              "top": "200",
-              "stepType": "/api/3/workflow_step_types/74932bdc-b8b6-4d24-88c4-1a4dfbc524f3",
-              "uuid": "e16f404e-0b62-41c1-9648-21e4989321e9"
             },
             {
               "@type": "WorkflowStep",
@@ -176,133 +179,117 @@
                 "step_variables": []
               },
               "status": null,
-              "left": "532",
-              "top": "300",
+              "top": "280",
+              "left": "920",
               "stepType": "/api/3/workflow_step_types/0109f35d-090b-4a2b-bd8a-94cbc3508562",
               "uuid": "fe3b84f2-480d-44bf-9989-b8e04d769c78"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Create",
+              "description": null,
+              "arguments": {
+                "arguments": {
+                  "expiry": "{{vars.steps.Fetch.expiry}}",
+                  "confidence": "{{vars.steps.Fetch.confidence}}",
+                  "threat_feeds": "{{vars.steps.Fetch.data}}",
+                  "tlp_resolved": "{{vars.steps.Fetch.tlp_resolved}}",
+                  "reputation_resolved": "{{vars.steps.Fetch.reputation_resolved}}"
+                },
+                "apply_async": false,
+                "step_variables": [],
+                "workflowReference": "/api/3/workflows/ef459fff-30b0-4de5-936a-21337b312e68"
+              },
+              "status": null,
+              "top": "200",
+              "left": "600",
+              "stepType": "/api/3/workflow_step_types/74932bdc-b8b6-4d24-88c4-1a4dfbc524f3",
+              "uuid": "2a4acd5c-1b6d-48f9-a5cb-55766a5052ba"
             }
           ],
           "routes": [
             {
               "@type": "WorkflowRoute",
-              "uuid": "7aff5925-267e-4d4e-9929-4ea778b1f355",
-              "name": "Create -> Update Last Pull Time",
-              "label": null,
-              "isExecuted": false,
-              "targetStep": "/api/3/workflow_steps/fe3b84f2-480d-44bf-9989-b8e04d769c78",
-              "sourceStep": "/api/3/workflow_steps/e16f404e-0b62-41c1-9648-21e4989321e9"
-            },
-            {
-              "@type": "WorkflowRoute",
-              "uuid": "ff71b3f2-27c6-49b4-bfa9-58e61170f55b",
               "name": "Start -> Fetch",
+              "targetStep": "/api/3/workflow_steps/60aba241-933c-43d6-80f1-1d37d06c9b89",
+              "sourceStep": "/api/3/workflow_steps/b0af6dd7-5aae-4680-b69e-f22ce15419dd",
               "label": null,
               "isExecuted": false,
-              "targetStep": "/api/3/workflow_steps/60aba241-933c-43d6-80f1-1d37d06c9b89",
-              "sourceStep": "/api/3/workflow_steps/b0af6dd7-5aae-4680-b69e-f22ce15419dd"
+              "uuid": "ff71b3f2-27c6-49b4-bfa9-58e61170f55b"
             },
             {
               "@type": "WorkflowRoute",
-              "uuid": "4f05341a-3b8f-4fdf-8ead-4f62847e3aff",
-              "name": "Fetch -> Create",
+              "name": "Fetch -> Create 1",
+              "targetStep": "/api/3/workflow_steps/2a4acd5c-1b6d-48f9-a5cb-55766a5052ba",
+              "sourceStep": "/api/3/workflow_steps/60aba241-933c-43d6-80f1-1d37d06c9b89",
               "label": null,
               "isExecuted": false,
-              "targetStep": "/api/3/workflow_steps/e16f404e-0b62-41c1-9648-21e4989321e9",
-              "sourceStep": "/api/3/workflow_steps/60aba241-933c-43d6-80f1-1d37d06c9b89"
+              "uuid": "c8150b28-0ac5-434a-8647-71a1ffd4976b"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Create 1 -> Update Last Pull Time",
+              "targetStep": "/api/3/workflow_steps/fe3b84f2-480d-44bf-9989-b8e04d769c78",
+              "sourceStep": "/api/3/workflow_steps/2a4acd5c-1b6d-48f9-a5cb-55766a5052ba",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "48e75899-004f-491b-8069-27024ff124b1"
             }
           ],
-          "versions": null,
-          "lastModifyDate": 1606400661,
           "priority": null,
           "uuid": "254deff6-13d0-4ef0-bdcc-9e38aa19521d",
+          "id": 555,
+          "createUser": "/api/3/appliances/57545210-2adc-472b-a24f-2df6ee8dfe63",
+          "createDate": 1649162690.437521,
+          "modifyUser": "/api/3/people/3451141c-bac6-467c-8d72-85e0fab569ce",
+          "modifyDate": 1649233891.033094,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
           "recordTags": [
             "dataingestion",
             "ingest",
             "malsilo"
-          ],
-          "isPrivate": false,
-          "owners": []
+          ]
         },
         {
           "@type": "Workflow",
           "triggerLimit": null,
-          "name": ">>MalSilo > Init Macros",
+          "name": "> MalSilo > Fetch",
           "aliasName": null,
+          "tag": "#malsilo #dataingestion #fetch",
           "description": "Data Ingestion Playbook",
-          "collection": "/api/3/workflow_collections/dfd1ec27-4dfc-4eeb-9810-f3a3f21d86b1",
-          "tag": "#malsilo #dataingestion",
           "isActive": false,
+          "debug": false,
           "singleRecordExecution": false,
           "remoteExecutableFlag": false,
-          "parameters": [
-            "overrideIfNoMatch",
-            "macroName",
-            "macroValue"
-          ],
+          "parameters": [],
           "synchronous": false,
-          "triggerStep": "/api/3/workflow_steps/91972b4f-0a56-47c0-b977-6753f4ea20e9",
+          "lastModifyDate": 1649233922,
+          "collection": "/api/3/workflow_collections/dfd1ec27-4dfc-4eeb-9810-f3a3f21d86b1",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/d29b8219-0763-4171-9d44-6a66d35d67fd",
           "steps": [
             {
               "@type": "WorkflowStep",
-              "name": "Fetch Macro Current Value",
+              "name": "Configuration",
               "description": null,
               "arguments": {
-                "macroExistingRecord": "{{vars.steps.Get_Macro.data['hydra:member'][0]}}"
+                "tlp": "White",
+                "expiry": "30",
+                "tlp_map": "{'Red': \"{{'TrafficLightProtocol' | picklist('Red', 'uuid')}}\",'Amber':\"{{'TrafficLightProtocol' | picklist('Amber', 'uuid')}}\",'Green':\"{{'TrafficLightProtocol' | picklist('Green','uuid')}}\",'White': \"{{'TrafficLightProtocol' | picklist('White', 'uuid')}}\"}",
+                "fetchTime": "{{arrow.utcnow().timestamp}}",
+                "confidence": "50",
+                "reputation": "Suspicious",
+                "reputation_map": "{'Good': \"{{'IndicatorReputation' | picklist('Good', 'uuid')}}\",'Suspicious': \"{{'IndicatorReputation' | picklist('Suspicious', 'uuid')}}\",'Malicious': \"{{'IndicatorReputation' | picklist('Malicious', 'uuid')}}\",'No Reputation Available': \"{{'IndicatorReputation' | picklist('No Reputation Available', 'uuid')}}\",'TBD': \"{{'IndicatorReputation' | picklist('TBD', 'uuid')}}\"}",
+                "macroNameForLastPullTime": "MalSiloLastPullTime"
               },
               "status": null,
-              "left": "580",
-              "top": "380",
+              "top": "140",
+              "left": "151",
               "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
-              "uuid": "6a7938a2-c487-47eb-b625-e19253fdc2d3"
-            },
-            {
-              "@type": "WorkflowStep",
-              "name": "Macro Exists",
-              "description": null,
-              "arguments": {
-                "conditions": [
-                  {
-                    "option": "Does Not Exist",
-                    "step_iri": "/api/3/workflow_steps/7fc65cdd-7928-401e-b490-9899796a37ba",
-                    "condition": "{{ vars.steps.Get_Macro.data['hydra:totalItems']==0 }}",
-                    "step_name": "Create ServiceNow Macro"
-                  },
-                  {
-                    "option": "Exists",
-                    "default": true,
-                    "step_iri": "/api/3/workflow_steps/6a7938a2-c487-47eb-b625-e19253fdc2d3",
-                    "step_name": "Fetch Macro Current Value"
-                  }
-                ]
-              },
-              "status": null,
-              "left": "380",
-              "top": "280",
-              "stepType": "/api/3/workflow_step_types/12254cf5-5db7-4b1a-8cb1-3af081924b28",
-              "uuid": "1e2a864e-aa13-4b48-8cfe-f1606d4eca1f"
-            },
-            {
-              "@type": "WorkflowStep",
-              "name": "Update Marco If Required",
-              "description": null,
-              "arguments": {
-                "when": "{{(vars.overrideIfNoMatch  == true) and (vars.macroExistingRecord.value != vars.macroValue)}}",
-                "params": {
-                  "iri": "/api/wf/api/dynamic-variable/{{ vars.macroExistingRecord.id }}/",
-                  "body": "{ 'name': '{{vars.macroName}}'   , 'value': '{{vars.macroValue}}' }",
-                  "method": "PUT"
-                },
-                "version": "3.0.3",
-                "connector": "cyops_utilities",
-                "operation": "make_cyops_request",
-                "operationTitle": "CyOPs: Make CyOPs API Call",
-                "step_variables": []
-              },
-              "status": null,
-              "left": "580",
-              "top": "520",
-              "stepType": "/api/3/workflow_step_types/0109f35d-090b-4a2b-bd8a-94cbc3508562",
-              "uuid": "9dbb7cb0-57f7-4904-b177-d80c03afe88a"
+              "uuid": "bcced530-f04c-415f-a766-651c5e1f91ec"
             },
             {
               "@type": "WorkflowStep",
@@ -311,187 +298,14 @@
               "arguments": {
                 "step_variables": {
                   "input": {
-                    "params": {
-                      "macroName": "{{ vars.macroName }}",
-                      "macroValue": "{{ vars.macroValue }}",
-                      "overrideIfNoMatch": "{{ vars.overrideIfNoMatch }}",
-                      "ServiceNowMacroName": "{{ vars.ServiceNowMacroName }}",
-                      "ServiceNowMacroValue": "{{ vars.ServiceNowMacroValue }}"
-                    }
-                  }
+                    "params": []
+                  },
+                  "_configuration_schema": "[\n  {\n    \"title\": \"Type of feeds to ingest\",\n    \"name\": \"feedtypes\",\n    \"type\": \"multiselect\",\n    \"tooltip\": \"Select one or more types you want to pull from the MalSilo feeds list\",\n    \"required\": true,\n    \"editable\": true,\n    \"visible\": true,\n    \"options\": [\n      \"IP\",\n      \"Domain\",\n      \"URL\"\n    ],\n    \"options\": [\"IP\", \"Domain\", \"URL\"],\n    \"value\": [\"IP\", \"Domain\", \"URL\"]\n  },\n{\n    \"title\": \"Confidence\",\n    \"name\": \"confidence\",\n    \"type\": \"integer\",\n    \"tooltip\": \"Default Confidence score to be set for the feeds, in case the feed record doesn't have a confidence score\",\n    \"required\": false,\n    \"editable\": true,\n    \"visible\": true,\n    \"value\": 50,\n    \"validation\": {\n       \"minlength\": 0,\n       \"maxlength\": 100\n    }\n  },\n  {\n    \"title\": \"Reputation\",\n    \"name\": \"reputation\",\n    \"type\": \"select\",\n    \"tooltip\": \"Default Reputation to be set for the feeds\",\n    \"required\": true,\n    \"editable\": true,\n    \"visible\": true,\n    \"options\": [\"Good\", \"Suspicious\", \"Malicious\", \"No Reputation Available\", \"TBD\"],\n    \"value\": \"Suspicious\"\n  },\n  {\n    \"title\": \"TLP\",\n    \"name\": \"tlp\",\n    \"type\": \"select\",\n    \"tooltip\": \"Default TLP to be set for the feeds\",\n    \"required\": false,\n    \"editable\": true,\n    \"visible\": true,\n    \"options\": [\"Red\", \"Amber\", \"Green\", \"White\"],\n    \"value\": \"White\"\n  },\n{\n    \"title\": \"Maximum Age (in days)\",\n    \"name\": \"expiry\",\n    \"type\": \"integer\",\n    \"tooltip\": \"Default age for the feeds. The indicator expires on 'valid_until' date unless a different expiry is specified here. If specified, the indicator will be marked expired on valid_from + expiry.\",\n    \"required\": false,\n    \"editable\": true,\n    \"visible\": true,\n    \"value\": 30\n  }\n  ]"
                 }
               },
               "status": null,
-              "left": "380",
               "top": "20",
-              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62",
-              "uuid": "91972b4f-0a56-47c0-b977-6753f4ea20e9"
-            },
-            {
-              "@type": "WorkflowStep",
-              "name": "Create Macro",
-              "description": null,
-              "arguments": {
-                "params": {
-                  "iri": "/api/wf/api/dynamic-variable/?format=json",
-                  "body": "{ 'name': '{{vars.macroName}}'   , 'value': '{{vars.macroValue}}' }",
-                  "method": "POST"
-                },
-                "version": "3.0.3",
-                "connector": "cyops_utilities",
-                "operation": "make_cyops_request",
-                "operationTitle": "CyOPs: Make CyOPs API Call",
-                "step_variables": []
-              },
-              "status": null,
-              "left": "180",
-              "top": "375",
-              "stepType": "/api/3/workflow_step_types/0109f35d-090b-4a2b-bd8a-94cbc3508562",
-              "uuid": "7fc65cdd-7928-401e-b490-9899796a37ba"
-            },
-            {
-              "@type": "WorkflowStep",
-              "name": "Get Macro",
-              "description": null,
-              "arguments": {
-                "params": {
-                  "iri": "/api/wf/api/dynamic-variable/?format=json&name={{vars.macroName}}",
-                  "body": "",
-                  "method": "GET"
-                },
-                "version": "3.0.3",
-                "connector": "cyops_utilities",
-                "operation": "make_cyops_request",
-                "operationTitle": "CyOPs: Make CyOPs API Call",
-                "step_variables": []
-              },
-              "status": null,
-              "left": "380",
-              "top": "153",
-              "stepType": "/api/3/workflow_step_types/0109f35d-090b-4a2b-bd8a-94cbc3508562",
-              "uuid": "29c5eeb6-d70a-4660-8551-d934eb63d9ab"
-            }
-          ],
-          "routes": [
-            {
-              "@type": "WorkflowRoute",
-              "uuid": "017ba23a-4940-4cf6-9a8e-8dc15d77db99",
-              "name": "Get ServiceNow Macros -> ServiceNow Macro Exists",
-              "label": null,
-              "isExecuted": false,
-              "targetStep": "/api/3/workflow_steps/1e2a864e-aa13-4b48-8cfe-f1606d4eca1f",
-              "sourceStep": "/api/3/workflow_steps/29c5eeb6-d70a-4660-8551-d934eb63d9ab"
-            },
-            {
-              "@type": "WorkflowRoute",
-              "uuid": "9d989416-8b8c-48ca-a28c-a1cdabe709d1",
-              "name": "Start -> Get ServiceNow Macros",
-              "label": null,
-              "isExecuted": false,
-              "targetStep": "/api/3/workflow_steps/29c5eeb6-d70a-4660-8551-d934eb63d9ab",
-              "sourceStep": "/api/3/workflow_steps/91972b4f-0a56-47c0-b977-6753f4ea20e9"
-            },
-            {
-              "@type": "WorkflowRoute",
-              "uuid": "62b0e52d-7bc2-42c2-8a00-c48a9fa16b98",
-              "name": "Fetch Macro Current Value -> Update Marco If Required",
-              "label": null,
-              "isExecuted": false,
-              "targetStep": "/api/3/workflow_steps/9dbb7cb0-57f7-4904-b177-d80c03afe88a",
-              "sourceStep": "/api/3/workflow_steps/6a7938a2-c487-47eb-b625-e19253fdc2d3"
-            },
-            {
-              "@type": "WorkflowRoute",
-              "uuid": "d998bf7f-ad2d-4f30-8e92-2f08d8a0b854",
-              "name": "ServiceNow Macro Exists -> Create ServiceNow Macro",
-              "label": "Does Not Exist",
-              "isExecuted": false,
-              "targetStep": "/api/3/workflow_steps/7fc65cdd-7928-401e-b490-9899796a37ba",
-              "sourceStep": "/api/3/workflow_steps/1e2a864e-aa13-4b48-8cfe-f1606d4eca1f"
-            },
-            {
-              "@type": "WorkflowRoute",
-              "uuid": "fb09c6a2-8009-4036-9707-da784f33a6e6",
-              "name": "ServiceNow Macro Exists -> Fetch Macro Current Value",
-              "label": "Exists",
-              "isExecuted": false,
-              "targetStep": "/api/3/workflow_steps/6a7938a2-c487-47eb-b625-e19253fdc2d3",
-              "sourceStep": "/api/3/workflow_steps/1e2a864e-aa13-4b48-8cfe-f1606d4eca1f"
-            }
-          ],
-          "versions": null,
-          "lastModifyDate": 1606400649,
-          "priority": null,
-          "uuid": "3438e177-06af-4470-b60e-d31ce72a311f",
-          "recordTags": [
-            "dataingestion",
-            "malsilo"
-          ],
-          "isPrivate": false,
-          "owners": []
-        },
-        {
-          "@type": "Workflow",
-          "triggerLimit": null,
-          "name": "> MalSilo > Fetch",
-          "aliasName": null,
-          "description": "Data Ingestion Playbook",
-          "collection": "/api/3/workflow_collections/dfd1ec27-4dfc-4eeb-9810-f3a3f21d86b1",
-          "tag": "#malsilo #dataingestion #fetch",
-          "isActive": false,
-          "singleRecordExecution": false,
-          "remoteExecutableFlag": false,
-          "parameters": [],
-          "synchronous": false,
-          "triggerStep": "/api/3/workflow_steps/d29b8219-0763-4171-9d44-6a66d35d67fd",
-          "steps": [
-            {
-              "@type": "WorkflowStep",
-              "name": "Configuration",
-              "description": null,
-              "arguments": {
-                "fetchTime": "{{arrow.utcnow().timestamp}}",
-                "macroNameForLastPullTime": "MalSiloLastPullTime"
-              },
-              "status": null,
-              "left": "151",
-              "top": "140",
-              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
-              "uuid": "bcced530-f04c-415f-a766-651c5e1f91ec"
-            },
-            {
-              "@type": "WorkflowStep",
-              "name": "Environment Setup",
-              "description": null,
-              "arguments": {
-                "when": "{{vars.request.env_setup}}",
-                "arguments": {
-                  "macroName": "{{vars.macroNameForLastPullTime}}",
-                  "macroValue": "0",
-                  "overrideIfNoMatch": "false"
-                },
-                "apply_async": false,
-                "step_variables": [],
-                "workflowReference": "/api/3/workflows/3438e177-06af-4470-b60e-d31ce72a311f"
-              },
-              "status": null,
-              "left": "300",
-              "top": "260",
-              "stepType": "/api/3/workflow_step_types/74932bdc-b8b6-4d24-88c4-1a4dfbc524f3",
-              "uuid": "81899b5e-84c9-497a-b9b0-2279285cc917"
-            },
-            {
-              "@type": "WorkflowStep",
-              "name": "Start",
-              "description": null,
-              "arguments": {
-                "step_variables": {
-                  "_configuration_schema": "[\n  {\n    \"title\": \"Type of feeds to ingest\",\n    \"name\": \"feedtypes\",\n    \"type\": \"multiselect\",\n    \"tooltip\": \"Select one or more types you want to pull from the MalSilo feeds list\",\n    \"required\": true,\n    \"editable\": true,\n    \"visible\": true,\n    \"options\": [\n      \"IP\",\n      \"Domain\",\n      \"URL\"\n    ],\n    \"options\": [\"IP\", \"Domain\", \"URL\"],\n    \"value\": [\"IP\", \"Domain\", \"URL\"]\n  }\n]"
-                }
-              },
-              "status": null,
               "left": "0",
-              "top": "20",
               "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62",
               "uuid": "d29b8219-0763-4171-9d44-6a66d35d67fd"
             },
@@ -501,12 +315,16 @@
               "description": "For mapping in the ingestion wizard, we need not have all the data. 5 samples of all types - ip, domain, url should be sufficient",
               "arguments": {
                 "data": "{{ (vars.ipFeeds.feed | json_query('[:5]')) | union(vars.urlFeeds.feed | json_query('[:5]')) | union(vars.domainFeeds.feed | json_query('[:5]'))}}",
+                "expiry": "{{vars.expiry}}",
+                "confidence": "{{vars.confidence}}",
                 "lastPullTime": "{{vars.fetchTime}}",
-                "lastPullTimeMacro": "{{vars.macroNameForLastPullTime}}"
+                "tlp_resolved": "{{vars.tlp_resolved}}",
+                "lastPullTimeMacro": "{{vars.macroNameForLastPullTime}}",
+                "reputation_resolved": "{{vars.reputation_resolved}}"
               },
               "status": null,
-              "left": "1580",
-              "top": "140",
+              "top": "260",
+              "left": "1820",
               "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
               "uuid": "33daec82-c55c-4c1d-a066-eaafe2d50443"
             },
@@ -515,13 +333,17 @@
               "name": "Collect all data newer than last pull time",
               "description": null,
               "arguments": {
-                "data": "{% set _new_feeds=[] %}\n{% if vars.ipFeeds.generatedAt > vars.lastSuccessPullTime %}\n{% set _temp=_new_feeds.extend(vars.ipFeeds.feed) %}\n{% endif %}\n{% if vars.urlFeeds.generatedAt > vars.lastSuccessPullTime %}\n{% set _temp=_new_feeds.extend(vars.urlFeeds.feed) %}\n{% endif %}\n{% if vars.domainFeeds.generatedAt > vars.lastSuccessPullTime %}\n{% set _temp=_new_feeds.extend(vars.domainFeeds.feed) %}\n{% endif %}\n{{ _new_feeds }}",
+                "data": "{% set _new_feeds=[] %}\n{% set _temp=_new_feeds.extend(vars.ipFeeds.feed) %}\n{% set _temp=_new_feeds.extend(vars.urlFeeds.feed) %}\n{% set _temp=_new_feeds.extend(vars.domainFeeds.feed) %}\n{{ _new_feeds }}",
+                "expiry": "{{vars.expiry}}",
+                "confidence": "{{vars.confidence}}",
                 "lastPullTime": "{{vars.fetchTime}}",
-                "lastPullTimeMacro": "{{vars.macroNameForLastPullTime}}"
+                "tlp_resolved": "{{vars.tlp_resolved}}",
+                "lastPullTimeMacro": "{{vars.macroNameForLastPullTime}}",
+                "reputation_resolved": "{{vars.reputation_resolved}}"
               },
               "status": null,
-              "left": "1891",
-              "top": "420",
+              "top": "500",
+              "left": "2160",
               "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
               "uuid": "3bbf1071-795b-4e8e-a4a1-8f6d7214d6da"
             },
@@ -544,8 +366,8 @@
                 }
               },
               "status": null,
-              "left": "1580",
-              "top": "420",
+              "top": "500",
+              "left": "1820",
               "stepType": "/api/3/workflow_step_types/0109f35d-090b-4a2b-bd8a-94cbc3508562",
               "uuid": "0f3abcb0-014e-4d6b-be8c-1be45f89743f"
             },
@@ -556,9 +378,11 @@
               "arguments": {
                 "name": "MalSilo",
                 "when": "{{\"IP\" in vars.feedtypes}}",
-                "config": "0c8a5021-d608-4cad-8af3-c30962e8a095",
-                "params": [],
-                "version": "1.0.0",
+                "config": "71786850-ce25-4493-afad-8817c441ced6",
+                "params": {
+                  "last_pull_time": "{{vars.lastPullTime}}"
+                },
+                "version": "2.0.0",
                 "connector": "malsilo",
                 "operation": "get_ipv4_feed",
                 "operationTitle": "Get IPv4 Feeds",
@@ -568,8 +392,8 @@
                 }
               },
               "status": null,
-              "left": "600",
-              "top": "160",
+              "top": "280",
+              "left": "800",
               "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
               "uuid": "6949656e-b94a-4d0d-8757-cda74d044bae"
             },
@@ -580,9 +404,11 @@
               "arguments": {
                 "name": "MalSilo",
                 "when": "{{\"Domain\" in vars.feedtypes}}",
-                "config": "0c8a5021-d608-4cad-8af3-c30962e8a095",
-                "params": [],
-                "version": "1.0.0",
+                "config": "71786850-ce25-4493-afad-8817c441ced6",
+                "params": {
+                  "last_pull_time": "{{vars.lastPullTime}}"
+                },
+                "version": "2.0.0",
                 "connector": "malsilo",
                 "operation": "get_domain_feed",
                 "operationTitle": "Get Domain Feeds",
@@ -592,8 +418,8 @@
                 }
               },
               "status": null,
-              "left": "600",
-              "top": "260",
+              "top": "380",
+              "left": "800",
               "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
               "uuid": "65496130-c9cc-42fb-a447-38598b8070e4"
             },
@@ -618,8 +444,8 @@
                 ]
               },
               "status": null,
-              "left": "1225",
-              "top": "260",
+              "top": "380",
+              "left": "1440",
               "stepType": "/api/3/workflow_step_types/12254cf5-5db7-4b1a-8cb1-3af081924b28",
               "uuid": "1539f637-e2b8-4aa2-8b94-bed35599d2da"
             },
@@ -630,9 +456,11 @@
               "arguments": {
                 "name": "MalSilo",
                 "when": "{{\"URL\" in vars.feedtypes}}",
-                "config": "0c8a5021-d608-4cad-8af3-c30962e8a095",
-                "params": [],
-                "version": "1.0.0",
+                "config": "71786850-ce25-4493-afad-8817c441ced6",
+                "params": {
+                  "last_pull_time": "{{vars.lastPullTime}}"
+                },
+                "version": "2.0.0",
                 "connector": "malsilo",
                 "operation": "get_url_feed",
                 "operationTitle": "Get URL Feeds",
@@ -642,8 +470,8 @@
                 }
               },
               "status": null,
-              "left": "600",
-              "top": "360",
+              "top": "480",
+              "left": "800",
               "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
               "uuid": "b59ed053-0017-4a09-b81b-30c637ee36d3"
             },
@@ -657,147 +485,204 @@
                 "domainFeeds": "{% if \"Domain\" in vars.feedtypes %}{{vars.steps.Fetch_Domain.data}}{% else %}{\"feed\": [], \"generatedAt\": 0}{% endif %}"
               },
               "status": null,
-              "left": "940",
-              "top": "260",
+              "top": "380",
+              "left": "1140",
               "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
               "uuid": "09b015f7-bebe-46f6-bb67-08ffeaa1d7fc"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Resolve Range",
+              "description": null,
+              "arguments": {
+                "tlp_resolved": "{{vars.tlp | resolveRange(vars.tlp_map)}}",
+                "pullTimeMacroName": "MalSiloLastPullTime",
+                "reputation_resolved": "{{vars.reputation | resolveRange(vars.reputation_map)}}"
+              },
+              "status": null,
+              "top": "260",
+              "left": "300",
+              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+              "uuid": "e84e7705-a110-4b83-8027-e966a29c7eb4"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Get Last Pull Time",
+              "description": null,
+              "arguments": {
+                "when": "{{vars.request.env_setup}}",
+                "params": {
+                  "iri": "/api/wf/api/dynamic-variable/?name={{vars.pullTimeMacroName}}",
+                  "body": "",
+                  "method": "GET"
+                },
+                "version": "3.2.1",
+                "connector": "cyops_utilities",
+                "operation": "make_cyops_request",
+                "operationTitle": "FSR: Make FortiSOAR API Call",
+                "step_variables": {
+                  "lastPullTime": "{% if (vars.steps.Get_Macro_Value.data[\"hydra:member\"] | length) > 0%}{{vars.steps.Get_Macro_Value.data[\"hydra:member\"][0].value }}{% else %}0{% endif %}"
+                }
+              },
+              "status": null,
+              "top": "380",
+              "left": "460",
+              "stepType": "/api/3/workflow_step_types/0109f35d-090b-4a2b-bd8a-94cbc3508562",
+              "uuid": "0c130a60-1d82-43b2-900c-c0ba3c00c716"
             }
           ],
           "routes": [
             {
               "@type": "WorkflowRoute",
-              "uuid": "9f755ec5-fff6-4469-99ef-d861990aef44",
               "name": "Start -> Configuration",
-              "label": null,
-              "isExecuted": false,
               "targetStep": "/api/3/workflow_steps/bcced530-f04c-415f-a766-651c5e1f91ec",
-              "sourceStep": "/api/3/workflow_steps/d29b8219-0763-4171-9d44-6a66d35d67fd"
-            },
-            {
-              "@type": "WorkflowRoute",
-              "uuid": "c91979c0-aac1-4351-92e4-2698973a2d85",
-              "name": "Configuration -> Environment Setup",
+              "sourceStep": "/api/3/workflow_steps/d29b8219-0763-4171-9d44-6a66d35d67fd",
               "label": null,
               "isExecuted": false,
-              "targetStep": "/api/3/workflow_steps/81899b5e-84c9-497a-b9b0-2279285cc917",
-              "sourceStep": "/api/3/workflow_steps/bcced530-f04c-415f-a766-651c5e1f91ec"
+              "uuid": "9f755ec5-fff6-4469-99ef-d861990aef44"
             },
             {
               "@type": "WorkflowRoute",
-              "uuid": "b0f371c5-b8c2-451c-a4da-ea8b350cc08d",
-              "name": "Environment Setup -> Fetch IPv4",
-              "label": null,
-              "isExecuted": false,
-              "targetStep": "/api/3/workflow_steps/6949656e-b94a-4d0d-8757-cda74d044bae",
-              "sourceStep": "/api/3/workflow_steps/81899b5e-84c9-497a-b9b0-2279285cc917"
-            },
-            {
-              "@type": "WorkflowRoute",
-              "uuid": "12a5448f-6dc2-4334-9326-1191dfcb9c4a",
-              "name": "Environment Setup -> Copy  of Fetch IPv4",
-              "label": null,
-              "isExecuted": false,
-              "targetStep": "/api/3/workflow_steps/65496130-c9cc-42fb-a447-38598b8070e4",
-              "sourceStep": "/api/3/workflow_steps/81899b5e-84c9-497a-b9b0-2279285cc917"
-            },
-            {
-              "@type": "WorkflowRoute",
-              "uuid": "1e2f1d54-0e39-4b99-98df-9d41d9859534",
-              "name": "Environment Setup -> Copy 1 of Fetch IPv4",
-              "label": null,
-              "isExecuted": false,
-              "targetStep": "/api/3/workflow_steps/b59ed053-0017-4a09-b81b-30c637ee36d3",
-              "sourceStep": "/api/3/workflow_steps/81899b5e-84c9-497a-b9b0-2279285cc917"
-            },
-            {
-              "@type": "WorkflowRoute",
-              "uuid": "da967b90-e6db-4362-ba2d-154f7ef7b692",
               "name": "Do we need data only for mapping -> Take samples of all types",
+              "targetStep": "/api/3/workflow_steps/33daec82-c55c-4c1d-a066-eaafe2d50443",
+              "sourceStep": "/api/3/workflow_steps/1539f637-e2b8-4aa2-8b94-bed35599d2da",
               "label": "Yes, field mapping only",
               "isExecuted": false,
-              "targetStep": "/api/3/workflow_steps/33daec82-c55c-4c1d-a066-eaafe2d50443",
-              "sourceStep": "/api/3/workflow_steps/1539f637-e2b8-4aa2-8b94-bed35599d2da"
+              "uuid": "da967b90-e6db-4362-ba2d-154f7ef7b692"
             },
             {
               "@type": "WorkflowRoute",
-              "uuid": "3dd84bc3-0ce4-4e57-94fc-f39eb1421290",
               "name": "Do we need data only for mapping -> Copy  of Get Last Successfull Pull Time",
+              "targetStep": "/api/3/workflow_steps/0f3abcb0-014e-4d6b-be8c-1be45f89743f",
+              "sourceStep": "/api/3/workflow_steps/1539f637-e2b8-4aa2-8b94-bed35599d2da",
               "label": "No, for ingestion",
               "isExecuted": false,
-              "targetStep": "/api/3/workflow_steps/0f3abcb0-014e-4d6b-be8c-1be45f89743f",
-              "sourceStep": "/api/3/workflow_steps/1539f637-e2b8-4aa2-8b94-bed35599d2da"
+              "uuid": "3dd84bc3-0ce4-4e57-94fc-f39eb1421290"
             },
             {
               "@type": "WorkflowRoute",
-              "uuid": "5eb973a1-94b7-41fb-b228-fa6362734829",
               "name": "Get Last Successfull Pull Time -> Collect all data newer than last pull time",
-              "label": null,
-              "isExecuted": false,
               "targetStep": "/api/3/workflow_steps/3bbf1071-795b-4e8e-a4a1-8f6d7214d6da",
-              "sourceStep": "/api/3/workflow_steps/0f3abcb0-014e-4d6b-be8c-1be45f89743f"
+              "sourceStep": "/api/3/workflow_steps/0f3abcb0-014e-4d6b-be8c-1be45f89743f",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "5eb973a1-94b7-41fb-b228-fa6362734829"
             },
             {
               "@type": "WorkflowRoute",
-              "uuid": "eba083f6-e840-4aa8-b3ed-18a4f4955ef6",
               "name": "Fetch IPv4 -> Copy  of Configuration",
+              "targetStep": "/api/3/workflow_steps/09b015f7-bebe-46f6-bb67-08ffeaa1d7fc",
+              "sourceStep": "/api/3/workflow_steps/6949656e-b94a-4d0d-8757-cda74d044bae",
               "label": null,
               "isExecuted": false,
-              "targetStep": "/api/3/workflow_steps/09b015f7-bebe-46f6-bb67-08ffeaa1d7fc",
-              "sourceStep": "/api/3/workflow_steps/6949656e-b94a-4d0d-8757-cda74d044bae"
+              "uuid": "eba083f6-e840-4aa8-b3ed-18a4f4955ef6"
             },
             {
               "@type": "WorkflowRoute",
-              "uuid": "3c96cc59-ae7d-4554-8acc-1c087bda2161",
               "name": "Fetch Domain -> Copy  of Configuration",
+              "targetStep": "/api/3/workflow_steps/09b015f7-bebe-46f6-bb67-08ffeaa1d7fc",
+              "sourceStep": "/api/3/workflow_steps/65496130-c9cc-42fb-a447-38598b8070e4",
               "label": null,
               "isExecuted": false,
-              "targetStep": "/api/3/workflow_steps/09b015f7-bebe-46f6-bb67-08ffeaa1d7fc",
-              "sourceStep": "/api/3/workflow_steps/65496130-c9cc-42fb-a447-38598b8070e4"
+              "uuid": "3c96cc59-ae7d-4554-8acc-1c087bda2161"
             },
             {
               "@type": "WorkflowRoute",
-              "uuid": "671b1ca3-bcd7-405c-a3f5-ee2ef4156a88",
               "name": "Fetch URL -> Copy  of Configuration",
+              "targetStep": "/api/3/workflow_steps/09b015f7-bebe-46f6-bb67-08ffeaa1d7fc",
+              "sourceStep": "/api/3/workflow_steps/b59ed053-0017-4a09-b81b-30c637ee36d3",
               "label": null,
               "isExecuted": false,
-              "targetStep": "/api/3/workflow_steps/09b015f7-bebe-46f6-bb67-08ffeaa1d7fc",
-              "sourceStep": "/api/3/workflow_steps/b59ed053-0017-4a09-b81b-30c637ee36d3"
+              "uuid": "671b1ca3-bcd7-405c-a3f5-ee2ef4156a88"
             },
             {
               "@type": "WorkflowRoute",
-              "uuid": "3c783260-1666-4f51-a9fe-d525ec294582",
               "name": "Copy  of Configuration -> Do we need data only for mapping",
+              "targetStep": "/api/3/workflow_steps/1539f637-e2b8-4aa2-8b94-bed35599d2da",
+              "sourceStep": "/api/3/workflow_steps/09b015f7-bebe-46f6-bb67-08ffeaa1d7fc",
               "label": null,
               "isExecuted": false,
-              "targetStep": "/api/3/workflow_steps/1539f637-e2b8-4aa2-8b94-bed35599d2da",
-              "sourceStep": "/api/3/workflow_steps/09b015f7-bebe-46f6-bb67-08ffeaa1d7fc"
+              "uuid": "3c783260-1666-4f51-a9fe-d525ec294582"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Configuration -> Resolve Range",
+              "targetStep": "/api/3/workflow_steps/e84e7705-a110-4b83-8027-e966a29c7eb4",
+              "sourceStep": "/api/3/workflow_steps/bcced530-f04c-415f-a766-651c5e1f91ec",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "de3de96f-39a1-4b29-8900-1543e23d629b"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Resolve Range -> update macro",
+              "targetStep": "/api/3/workflow_steps/0c130a60-1d82-43b2-900c-c0ba3c00c716",
+              "sourceStep": "/api/3/workflow_steps/e84e7705-a110-4b83-8027-e966a29c7eb4",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "4d33ca52-e50d-4d76-aa74-a451df4da7d7"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "update macro -> Fetch Domain",
+              "targetStep": "/api/3/workflow_steps/65496130-c9cc-42fb-a447-38598b8070e4",
+              "sourceStep": "/api/3/workflow_steps/0c130a60-1d82-43b2-900c-c0ba3c00c716",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "1b64ce31-9c6a-495a-86b6-4f08ad3c7d04"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "update macro -> Fetch IPv4",
+              "targetStep": "/api/3/workflow_steps/6949656e-b94a-4d0d-8757-cda74d044bae",
+              "sourceStep": "/api/3/workflow_steps/0c130a60-1d82-43b2-900c-c0ba3c00c716",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "d5db29e2-97b6-40a2-89b6-2b241cb61988"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "update macro -> Fetch URL",
+              "targetStep": "/api/3/workflow_steps/b59ed053-0017-4a09-b81b-30c637ee36d3",
+              "sourceStep": "/api/3/workflow_steps/0c130a60-1d82-43b2-900c-c0ba3c00c716",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "2129c41c-32c0-472e-ac20-b2247e16fa35"
             }
           ],
-          "versions": null,
-          "lastModifyDate": 1606400984,
           "priority": null,
           "uuid": "9634df50-4ed5-45f0-a9ed-ad578a1e6a55",
+          "id": 557,
+          "createUser": "/api/3/appliances/57545210-2adc-472b-a24f-2df6ee8dfe63",
+          "createDate": 1649162690.439196,
+          "modifyUser": "/api/3/people/3451141c-bac6-467c-8d72-85e0fab569ce",
+          "modifyDate": 1649233922.909514,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
           "recordTags": [
             "dataingestion",
             "fetch",
             "malsilo"
-          ],
-          "isPrivate": false,
-          "owners": []
+          ]
         },
         {
           "@type": "Workflow",
           "triggerLimit": null,
           "name": "Get Domain Feeds",
           "aliasName": null,
-          "description": "Get Domain Feeds from MalSilo",
-          "collection": "/api/3/workflow_collections/dfd1ec27-4dfc-4eeb-9810-f3a3f21d86b1",
           "tag": null,
+          "description": "Get Domain Feeds from MalSilo",
           "isActive": false,
+          "debug": false,
           "singleRecordExecution": false,
           "remoteExecutableFlag": false,
           "parameters": [],
           "synchronous": false,
+          "lastModifyDate": 1649227695,
+          "collection": "/api/3/workflow_collections/dfd1ec27-4dfc-4eeb-9810-f3a3f21d86b1",
+          "versions": [],
           "triggerStep": "/api/3/workflow_steps/7e63f6ca-f03b-4843-ae0c-6dde01b3991d",
           "steps": [
             {
@@ -808,11 +693,12 @@
                 "route": "d1a6e7aa-5759-431c-9f4e-63a6f9d71e46",
                 "title": "Get MalSilo Domain Feeds",
                 "resources": [
-                  "indicators"
+                  "alerts"
                 ],
                 "inputVariables": [],
                 "step_variables": {
                   "input": {
+                    "params": [],
                     "records": "{{vars.input.records}}"
                   }
                 },
@@ -821,8 +707,8 @@
                 "singleRecordExecution": false
               },
               "status": null,
-              "left": "40",
               "top": "40",
+              "left": "40",
               "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
               "uuid": "7e63f6ca-f03b-4843-ae0c-6dde01b3991d"
             },
@@ -832,9 +718,11 @@
               "description": null,
               "arguments": {
                 "name": "MalSilo",
-                "config": "9cf5e6e3-31ab-40a6-bfd3-5a459b8a0eae",
-                "params": [],
-                "version": "1.0.0",
+                "config": "71786850-ce25-4493-afad-8817c441ced6",
+                "params": {
+                  "last_pull_time": "{% if globalVars.MalSiloLastPullTime %}{{ globalVars.MalSiloLastPullTime }}{% else %}{{ arrow.utcnow().timestamp }}{% endif %}"
+                },
+                "version": "2.0.0",
                 "connector": "malsilo",
                 "operation": "get_domain_feed",
                 "operationTitle": "Get Domain Feeds",
@@ -842,8 +730,8 @@
                 "step_variables": []
               },
               "status": null,
-              "left": "193",
-              "top": "135",
+              "top": "140",
+              "left": "200",
               "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
               "uuid": "9697d1de-e783-4069-a699-360439422071"
             }
@@ -851,39 +739,51 @@
           "routes": [
             {
               "@type": "WorkflowRoute",
-              "uuid": "eeb90c17-95ba-471a-8ee2-9e2aad629a67",
               "name": "Start -> Get IP Feeds",
+              "targetStep": "/api/3/workflow_steps/9697d1de-e783-4069-a699-360439422071",
+              "sourceStep": "/api/3/workflow_steps/7e63f6ca-f03b-4843-ae0c-6dde01b3991d",
               "label": null,
               "isExecuted": false,
-              "targetStep": "/api/3/workflow_steps/9697d1de-e783-4069-a699-360439422071",
-              "sourceStep": "/api/3/workflow_steps/7e63f6ca-f03b-4843-ae0c-6dde01b3991d"
+              "uuid": "eeb90c17-95ba-471a-8ee2-9e2aad629a67"
             }
           ],
-          "versions": null,
-          "lastModifyDate": 1604992717,
           "priority": "/api/3/picklists/2b563c61-ae2c-41c0-a85a-c9709585e3f2",
           "uuid": "ba94256a-34ac-4b3e-8438-325656ee2443",
+          "id": 558,
+          "createUser": "/api/3/appliances/57545210-2adc-472b-a24f-2df6ee8dfe63",
+          "createDate": 1649162690.440204,
+          "modifyUser": "/api/3/people/3451141c-bac6-467c-8d72-85e0fab569ce",
+          "modifyDate": 1649227695.578585,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
           "recordTags": [
             "malsilo"
-          ],
-          "isPrivate": false,
-          "owners": []
+          ]
         },
         {
           "@type": "Workflow",
           "triggerLimit": null,
           "name": "> MalSilo > Create",
           "aliasName": null,
-          "description": "Data Ingestion Playbook",
-          "collection": "/api/3/workflow_collections/dfd1ec27-4dfc-4eeb-9810-f3a3f21d86b1",
           "tag": "#malsilo #dataingestion #create",
+          "description": "Data Ingestion Playbook",
           "isActive": false,
+          "debug": true,
           "singleRecordExecution": false,
           "remoteExecutableFlag": false,
           "parameters": [
-            "threat_feeds"
+            "threat_feeds",
+            "confidence",
+            "tlp_resolved",
+            "reputation_resolved",
+            "expiry"
           ],
           "synchronous": false,
+          "lastModifyDate": 1649241943,
+          "collection": "/api/3/workflow_collections/dfd1ec27-4dfc-4eeb-9810-f3a3f21d86b1",
+          "versions": [],
           "triggerStep": "/api/3/workflow_steps/b68bd691-7ecf-4507-9f54-8c993e7a4581",
           "steps": [
             {
@@ -891,11 +791,15 @@
               "name": "Start",
               "description": null,
               "arguments": {
-                "step_variables": []
+                "step_variables": {
+                  "input": {
+                    "params": []
+                  }
+                }
               },
               "status": null,
-              "left": "125",
               "top": "30",
+              "left": "125",
               "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62",
               "uuid": "b68bd691-7ecf-4507-9f54-8c993e7a4581"
             },
@@ -906,11 +810,11 @@
               "arguments": {
                 "indicators_reputation_map": "{}",
                 "indicators_indicatorStatus_map": "{}",
-                "indicators_typeofindicator_map": "{'domain': {{'IndicatorType'| picklist('Domain') }}, 'ipv4': {{'IndicatorType'| picklist('IP Address') }}, 'url': {{'IndicatorType'| picklist('URL') }}}"
+                "indicators_typeofindicator_map": "{'domain': {{'ThreatIntelFeedType'| picklist('Domain') }}, 'ipv4': {{'ThreatIntelFeedType'| picklist('IP Address') }}, 'url': {{'ThreatIntelFeedType'| picklist('URL') }}}"
               },
               "status": null,
-              "left": "125",
               "top": "165",
+              "left": "125",
               "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
               "uuid": "252bacab-2487-4dfd-9af0-8d7b29862e93"
             },
@@ -922,104 +826,88 @@
                 "for_each": {
                   "item": "{{vars.input.params['threat_feeds']}}",
                   "__bulk": true,
-                  "condition": ""
+                  "condition": "",
+                  "batch_size": 100
                 },
                 "resource": {
-                  "value": "{% if vars.item.type==\"ipv4\" %}{{ vars.item['value'] | regex_replace(\":[0-9]*\", \"\")}}{% else %}{{ vars.item['value'] }}{% endif %}",
-                  "__link": {
-                    "recordTags": "{{vars.item.tags}}"
-                  },
-                  "sources": "MalSilo",
+                  "tLP": "{{vars.input.params['tlp_resolved']}}",
+                  "value": "{{ vars.item['value'] }}",
+                  "source": "MalSilo",
                   "lastSeen": "{{ arrow.get(vars.item.Lastseen, 'YYYY-MM-DD').timestamp }}",
-                  "__replace": "true",
-                  "firstSeen": "{{ arrow.get(vars.item.Firstseen, 'YYYY-MM-DD').timestamp }}",
-                  "reputation": {
-                    "id": 73,
-                    "@id": "/api/3/picklists/50bfd06c-9aff-4f7d-b6d9-821339e31fe7",
-                    "icon": null,
-                    "@type": "Picklist",
-                    "color": "#dbc030",
-                    "display": "Suspicious",
-                    "@context": "/api/3/contexts/Picklist",
-                    "listName": "/api/3/picklist_names/e75ed3c3-9f23-4a43-832b-0daf236209ba",
-                    "itemValue": "Suspicious",
-                    "orderIndex": 2
-                  },
-                  "description": "Threat: {{vars.item.threat}}\nTags: {{vars.item.tags}}\nValue:  {{vars.item[\"value\"] }}",
-                  "indicatorStatus": {
-                    "id": 369,
-                    "@id": "/api/3/picklists/2f5cff61-fbff-4bb3-96be-302b78a9fb47",
-                    "icon": null,
-                    "@type": "Picklist",
-                    "color": null,
-                    "display": "TBD",
-                    "@context": "/api/3/contexts/Picklist",
-                    "listName": "/api/3/picklist_names/e6639d57-94a9-432f-a46f-b2b530402077",
-                    "itemValue": "TBD",
-                    "orderIndex": 3
-                  },
-                  "typeofindicator": "{{vars.item[\"type\"] | resolveRange(vars.indicators_typeofindicator_map)}}"
+                  "__replace": "",
+                  "expiresOn": "{{arrow.get(vars.item.Lastseen).shift(years=0, months=0, weeks=0, days=vars.input.params.expiry, hours=0, minutes=0, seconds=0)}}",
+                  "validFrom": "{{ arrow.get(vars.item.Firstseen, 'YYYY-MM-DD').timestamp }}",
+                  "confidence": "{% if vars.input.params['confidence'] %}{{ vars.input.params['confidence'] }}{% else %}0{% endif %}",
+                  "recordTags": "{{vars.item[\"tags\"].split(\",\")}}",
+                  "reputation": "{{vars.input.params['reputation_resolved']}}",
+                  "typeOfFeed": "{{vars.item[\"type\"] | resolveRange(vars.indicators_typeofindicator_map)}}",
+                  "description": "<p>Threat: {{vars.item.threat}}<br>Tags: {{vars.item.tags}}<br>Value: &nbsp;{{vars.item[\"value\"] }}</p>"
                 },
                 "_showJson": false,
-                "operation": "Overwrite",
-                "collection": "/api/3/upsert/indicators",
-                "fieldOperation": {
-                  "recordTags": "Append"
-                },
+                "collection": "/api/ingest-feeds/threat_intel_feeds",
+                "__recommend": [],
                 "step_variables": []
               },
               "status": null,
-              "left": "125",
               "top": "300",
-              "stepType": "/api/3/workflow_step_types/2597053c-e718-44b4-8394-4d40fe26d357",
-              "uuid": "a462022e-7cde-43b8-95cf-cf7c02178145"
+              "left": "125",
+              "stepType": "/api/3/workflow_step_types/7b221880-716b-4726-a2ca-5e568d330b3e",
+              "uuid": "f2ad87e6-7d03-446d-82a1-384a4d289301"
             }
           ],
           "routes": [
             {
               "@type": "WorkflowRoute",
-              "uuid": "616c8708-0557-4a68-a194-0510bb6564a6",
               "name": "Start -> Configuration",
+              "targetStep": "/api/3/workflow_steps/252bacab-2487-4dfd-9af0-8d7b29862e93",
+              "sourceStep": "/api/3/workflow_steps/b68bd691-7ecf-4507-9f54-8c993e7a4581",
               "label": null,
               "isExecuted": false,
-              "targetStep": "/api/3/workflow_steps/252bacab-2487-4dfd-9af0-8d7b29862e93",
-              "sourceStep": "/api/3/workflow_steps/b68bd691-7ecf-4507-9f54-8c993e7a4581"
+              "uuid": "616c8708-0557-4a68-a194-0510bb6564a6"
             },
             {
               "@type": "WorkflowRoute",
-              "uuid": "52b2f59f-3b7f-44a7-b269-2fa1efaca87e",
               "name": "Configuration -> Create Record",
+              "targetStep": "/api/3/workflow_steps/f2ad87e6-7d03-446d-82a1-384a4d289301",
+              "sourceStep": "/api/3/workflow_steps/252bacab-2487-4dfd-9af0-8d7b29862e93",
               "label": null,
               "isExecuted": false,
-              "targetStep": "/api/3/workflow_steps/a462022e-7cde-43b8-95cf-cf7c02178145",
-              "sourceStep": "/api/3/workflow_steps/252bacab-2487-4dfd-9af0-8d7b29862e93"
+              "uuid": "77dfd132-a08e-4612-9c51-e1eedc932012"
             }
           ],
-          "versions": null,
-          "lastModifyDate": 1606400999,
           "priority": null,
           "uuid": "ef459fff-30b0-4de5-936a-21337b312e68",
+          "id": 559,
+          "createUser": "/api/3/appliances/57545210-2adc-472b-a24f-2df6ee8dfe63",
+          "createDate": 1649162690.440882,
+          "modifyUser": "/api/3/people/3451141c-bac6-467c-8d72-85e0fab569ce",
+          "modifyDate": 1649241944.238428,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
           "recordTags": [
             "dataingestion",
             "create",
             "malsilo"
-          ],
-          "isPrivate": false,
-          "owners": []
+          ]
         },
         {
           "@type": "Workflow",
           "triggerLimit": null,
           "name": "Get URL Feeds",
           "aliasName": null,
-          "description": "Get URL Feeds from MalSilo",
-          "collection": "/api/3/workflow_collections/dfd1ec27-4dfc-4eeb-9810-f3a3f21d86b1",
           "tag": null,
+          "description": "Get URL Feeds from MalSilo",
           "isActive": false,
+          "debug": false,
           "singleRecordExecution": false,
           "remoteExecutableFlag": false,
           "parameters": [],
           "synchronous": false,
+          "lastModifyDate": 1649163159,
+          "collection": "/api/3/workflow_collections/dfd1ec27-4dfc-4eeb-9810-f3a3f21d86b1",
+          "versions": [],
           "triggerStep": "/api/3/workflow_steps/1959341e-86e1-4d6a-be2f-608bed7c5997",
           "steps": [
             {
@@ -1043,8 +931,8 @@
                 "singleRecordExecution": false
               },
               "status": null,
-              "left": "40",
               "top": "40",
+              "left": "40",
               "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
               "uuid": "1959341e-86e1-4d6a-be2f-608bed7c5997"
             },
@@ -1054,9 +942,11 @@
               "description": null,
               "arguments": {
                 "name": "MalSilo",
-                "config": "9cf5e6e3-31ab-40a6-bfd3-5a459b8a0eae",
-                "params": [],
-                "version": "1.0.0",
+                "config": "71786850-ce25-4493-afad-8817c441ced6",
+                "params": {
+                  "last_pull_time": "{% if globalVars.MalSiloLastPullTime %}{{ globalVars.MalSiloLastPullTime }}{% else %}{{ arrow.utcnow().timestamp }}{% endif %}"
+                },
+                "version": "2.0.0",
                 "connector": "malsilo",
                 "operation": "get_url_feed",
                 "operationTitle": "Get URL Feeds",
@@ -1064,8 +954,8 @@
                 "step_variables": []
               },
               "status": null,
-              "left": "193",
-              "top": "135",
+              "top": "140",
+              "left": "200",
               "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
               "uuid": "8ab7a8c3-7dd1-45d0-bd67-d1ec6257038d"
             }
@@ -1073,23 +963,28 @@
           "routes": [
             {
               "@type": "WorkflowRoute",
-              "uuid": "24486673-8744-41bd-ae92-53f96f767e73",
               "name": "Start -> Get IP Feeds",
+              "targetStep": "/api/3/workflow_steps/8ab7a8c3-7dd1-45d0-bd67-d1ec6257038d",
+              "sourceStep": "/api/3/workflow_steps/1959341e-86e1-4d6a-be2f-608bed7c5997",
               "label": null,
               "isExecuted": false,
-              "targetStep": "/api/3/workflow_steps/8ab7a8c3-7dd1-45d0-bd67-d1ec6257038d",
-              "sourceStep": "/api/3/workflow_steps/1959341e-86e1-4d6a-be2f-608bed7c5997"
+              "uuid": "24486673-8744-41bd-ae92-53f96f767e73"
             }
           ],
-          "versions": null,
-          "lastModifyDate": 1604992734,
           "priority": "/api/3/picklists/2b563c61-ae2c-41c0-a85a-c9709585e3f2",
           "uuid": "f47c94de-e2fa-4347-b857-1a25a961b5b7",
+          "id": 560,
+          "createUser": "/api/3/appliances/57545210-2adc-472b-a24f-2df6ee8dfe63",
+          "createDate": 1649162690.441511,
+          "modifyUser": "/api/3/people/3451141c-bac6-467c-8d72-85e0fab569ce",
+          "modifyDate": 1649163159.440888,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
           "recordTags": [
             "malsilo"
-          ],
-          "isPrivate": false,
-          "owners": []
+          ]
         }
       ]
     }
