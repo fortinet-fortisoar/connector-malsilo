@@ -837,6 +837,7 @@
                   "__replace": "",
                   "expiresOn": "{{arrow.get(vars.item.Lastseen).shift(years=0, months=0, weeks=0, days=vars.input.params.expiry, hours=0, minutes=0, seconds=0)}}",
                   "validFrom": "{{ arrow.get(vars.item.Firstseen, 'YYYY-MM-DD').timestamp }}",
+                  "created": "{{arrow.now().format(\"YYYY-MM-DD HH:mm:ss ZZ\")}}",
                   "confidence": "{% if vars.input.params['confidence'] %}{{ vars.input.params['confidence'] }}{% else %}0{% endif %}",
                   "recordTags": "{{vars.item[\"tags\"].split(\",\")}}",
                   "reputation": "{{vars.input.params['reputation_resolved']}}",
