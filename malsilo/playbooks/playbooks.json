@@ -809,7 +809,7 @@
                   "expiresOn": "{{arrow.get(vars.item.Lastseen).shift(years=0, months=0, weeks=0, days=vars.input.params.expiry, hours=0, minutes=0, seconds=0)}}",
                   "validFrom": "{{ arrow.get(vars.item.Firstseen, 'YYYY-MM-DD').timestamp }}",
                   "confidence": "{% if vars.input.params['confidence'] %}{{ vars.input.params['confidence'] }}{% else %}0{% endif %}",
-                  "recordTags": "{% set _tags=[] %} {% set _temp=[] %} {% for my_item in vars.item[\"tags\"].split(\",\") %} {% if my_item | length > 2 %} {% set _temp=_tags.append(my_item) %} {% endif %} {% endfor %} {{_tags}}",
+                  "recordTags": "{% set _tags=[] %}{% set _temp=[] %}{% for my_item in vars.item[\"tags\"].split(\",\") %}{% if my_item | length > 2 %}{% set _temp=_tags.append(my_item) %}{% endif %}{% endfor %}{{_tags}}",
                   "reputation": "{{vars.input.params['reputation_resolved']}}",
                   "typeOfFeed": "{{vars.item[\"type\"] | resolveRange(vars.indicators_typeofindicator_map)}}",
                   "description": "<p>Threat: {{vars.item.threat}}<br>Tags: {{vars.item.tags}}<br>Value: &nbsp;{{vars.item[\"value\"] }}</p>"
