@@ -9,7 +9,7 @@
   "category": "ThreatIntel",
   "icon_small_name": "small.png",
   "icon_large_name": "large.png",
-  "help_online": "https://docs.fortinet.com/document/fortisoar/1.0.0/malsilo/75/malsilo-v1-0-0",
+  "help_online": "https://docs.fortinet.com/document/fortisoar/2.0.0/malsilo/255/malsilo-v2-0-0",
   "ingestion_supported": true,
   "tags": [
     "ThreatIntel"
@@ -70,7 +70,7 @@
     {
       "operation": "get_ipv4_feed",
       "title": "Get IPv4 Feeds",
-      "description": "Fetches the Threat Intel Feeds of type IPv4",
+      "description": "Fetches the threat intelligence feeds of type IPv4 from Malsilo.",
       "enabled": true,
       "annotation": "get_ipv4_feed",
       "category": "get_feed",
@@ -104,7 +104,7 @@
     {
       "operation": "get_url_feed",
       "title": "Get URL Feeds",
-      "description": "Fetches the Threat Intel feeds of type URL",
+      "description": "Fetches the threat intelligence feeds of type URL from Malsilo.",
       "enabled": true,
       "annotation": "get_url_feed",
       "category": "get_feed",
@@ -138,7 +138,7 @@
     {
       "operation": "get_domain_feed",
       "title": "Get Domain Feeds",
-      "description": "Fetches the Threat Intel feeds of type Domain",
+      "description": "Fetches the threat intelligence feeds of type Domain from Malsilo.",
       "enabled": true,
       "annotation": "get_domain_feed",
       "category": "get_feed",
