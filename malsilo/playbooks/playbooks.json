@@ -3,7 +3,7 @@
   "data": [
     {
       "@type": "WorkflowCollection",
-      "name": "Sample - MalSilo - 2.0.0",
+      "name": "Sample - MalSilo - 2.0.1",
       "description": "Sample playbooks for \"MalSilo\" connector. If you are planning to use any of the sample playbooks in your environment, ensure that you clone those playbooks and move them to a different collection, since the sample playbook collection gets deleted during connector upgrade and delete.",
       "visible": true,
       "image": "playbook_logo.png",
@@ -45,7 +45,7 @@
                 "params": {
                   "last_pull_time": "{% if globalVars.MalSiloLastPullTime %}{{ globalVars.MalSiloLastPullTime }}{% else %}{{ arrow.utcnow().timestamp }}{% endif %}"
                 },
-                "version": "2.0.0",
+                "version": "2.0.1",
                 "connector": "malsilo",
                 "operation": "get_ipv4_feed",
                 "operationTitle": "Get IPv4 Feeds",
@@ -359,7 +359,7 @@
                 "params": {
                   "last_pull_time": "{{vars.lastPullTime}}"
                 },
-                "version": "2.0.0",
+                "version": "2.0.1",
                 "connector": "malsilo",
                 "operation": "get_ipv4_feed",
                 "operationTitle": "Get IPv4 Feeds",
@@ -385,7 +385,7 @@
                 "params": {
                   "last_pull_time": "{{vars.lastPullTime}}"
                 },
-                "version": "2.0.0",
+                "version": "2.0.1",
                 "connector": "malsilo",
                 "operation": "get_domain_feed",
                 "operationTitle": "Get Domain Feeds",
@@ -437,7 +437,7 @@
                 "params": {
                   "last_pull_time": "{{vars.lastPullTime}}"
                 },
-                "version": "2.0.0",
+                "version": "2.0.1",
                 "connector": "malsilo",
                 "operation": "get_url_feed",
                 "operationTitle": "Get URL Feeds",
@@ -690,7 +690,7 @@
                 "params": {
                   "last_pull_time": "{% if globalVars.MalSiloLastPullTime %}{{ globalVars.MalSiloLastPullTime }}{% else %}{{ arrow.utcnow().timestamp }}{% endif %}"
                 },
-                "version": "2.0.0",
+                "version": "2.0.1",
                 "connector": "malsilo",
                 "operation": "get_domain_feed",
                 "operationTitle": "Get Domain Feeds",
@@ -804,10 +804,10 @@
                   "value": "{{ vars.item['value'] }}",
                   "source": "MalSilo",
                   "created": "{{vars.input.params.lastPullTime}}",
-                  "lastSeen": "{{ arrow.get(vars.item.Lastseen, 'YYYY-MM-DD').timestamp }}",
+                  "lastSeen": "{{ arrow.get(vars.item.Lastseen, 'YYYY-MM-DD').int_timestamp }}",
                   "__replace": "",
-                  "expiresOn": "{{arrow.get(vars.item.Lastseen).shift(years=0, months=0, weeks=0, days=vars.input.params.expiry, hours=0, minutes=0, seconds=0)}}",
-                  "validFrom": "{{ arrow.get(vars.item.Firstseen, 'YYYY-MM-DD').timestamp }}",
+                  "expiresOn": "{{arrow.get(vars.item.Lastseen).shift(years=0, months=0, weeks=0, days=vars.input.params.expiry, hours=0, minutes=0, seconds=0).int_timestamp}}",
+                  "validFrom": "{{ arrow.get(vars.item.Firstseen, 'YYYY-MM-DD').int_timestamp }}",
                   "confidence": "{% if vars.input.params['confidence'] %}{{ vars.input.params['confidence'] }}{% else %}0{% endif %}",
                   "recordTags": "{% set _tags=[] %}{% set _temp=[] %}{% for my_item in vars.item[\"tags\"].split(\",\") %}{% if my_item | length > 2 %}{% set _temp=_tags.append(my_item) %}{% endif %}{% endfor %}{{_tags}}",
                   "reputation": "{{vars.input.params['reputation_resolved']}}",
@@ -917,7 +917,7 @@
                 "params": {
                   "last_pull_time": "{% if globalVars.MalSiloLastPullTime %}{{ globalVars.MalSiloLastPullTime }}{% else %}{{ arrow.utcnow().timestamp }}{% endif %}"
                 },
-                "version": "2.0.0",
+                "version": "2.0.1",
                 "connector": "malsilo",
                 "operation": "get_url_feed",
                 "operationTitle": "Get URL Feeds",
