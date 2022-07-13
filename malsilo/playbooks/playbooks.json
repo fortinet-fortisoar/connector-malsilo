@@ -284,7 +284,7 @@
                 "confidence": "50",
                 "reputation": "Suspicious",
                 "reputation_map": "{'Good': \"{{'IndicatorReputation' | picklist('Good', 'uuid')}}\",'Suspicious': \"{{'IndicatorReputation' | picklist('Suspicious', 'uuid')}}\",'Malicious': \"{{'IndicatorReputation' | picklist('Malicious', 'uuid')}}\",'No Reputation Available': \"{{'IndicatorReputation' | picklist('No Reputation Available', 'uuid')}}\",'TBD': \"{{'IndicatorReputation' | picklist('TBD', 'uuid')}}\"}",
-                "macroNameForLastPullTime": "MalSiloLastPullTime"
+                "macroNameForLastPullTime": "MalSiloLastPullTime_{{vars['audit_info']['cyops_playbook_iri'].split('/')[-1].replace('-','_')}}"
               },
               "status": null,
               "top": "140",
