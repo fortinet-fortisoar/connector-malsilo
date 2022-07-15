@@ -9,7 +9,7 @@
   "category": "ThreatIntel",
   "icon_small_name": "small.png",
   "icon_large_name": "large.png",
-  "help_online": "https://docs.fortinet.com/document/fortisoar/2.0.0/malsilo/255/malsilo-v2-0-0",
+  "help_online": "https://docs.fortinet.com/document/fortisoar/2.0.1/malsilo/340/malsilo-v2-0-1",
   "ingestion_supported": true,
   "tags": [
     "ThreatIntel"
